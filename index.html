@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="demo" ng-controller="ctrl">
 <head>
 	<meta charset="UTF-8">
 	<title>Waitstaff Calculator</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 <script>
-	
+	var demo = angular.module('demo', []);
+		demo.controller('ctrl', function($scope){
+
+		});
 </script>
 <body>
 	<header>
@@ -16,9 +19,9 @@
 		<div class="content_column">
 			<div id="meal_details" class="content">
 				<form name="waitCalc">
-					<input type="number" required>
-					<input type="number" required>
-					<input type="number" required>
+					<input type="number" ng-model="base_price" required>
+					<input type="number" ng-model="tax_rate" required>
+					<input type="number" ng-model="tip_percent" required>
 					<button type="submit">Submit</button>
 					<button type="reset">Cancel</button>
 				</form>

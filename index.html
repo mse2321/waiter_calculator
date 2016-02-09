@@ -23,6 +23,7 @@ footer p { text-align: center; }
 
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
   <script>
     var demo = angular.module('demo', []);
       demo.controller('ctrl', function($scope){
@@ -71,76 +72,19 @@ footer p { text-align: center; }
   <body>
     <header>
       <h1>Waitstaff Calculator</h1>
+      <nav>
+        <ul>
+          <a href="#"><li>Home</li></a>
+          <a href="#"><li>New Meal</li></a>
+          <a href="#"><li>My Earnings</li></a>
+        </ul>
+      </nav>
     </header>
     <section class="container">
+
       <div class="content_column" id="data">
-        <div class="content">
-          <form name="waitCalc">
-            <div class="headings">Enter the Meal Details</div>
-            <table id="meal_details">
-              <tr>
-                <td>
-                  <div class="input_container">
-                    <label for="base_price">Base Meal Price: $ </label><input type="number" ng-model="base_price" required><br />
-                    <label for="tax_rate">Tax Rate: % </label><input type="number" ng-model="tax_rate" required><br />
-                    <label for="tip_percent">Tip Percentage: % </label><input type="number" ng-model="tip_percent" required><br />
-                  </div>
-                </td>
-              </tr>
-            </table>
-              <div class="form_buttons">
-                <button type="submit" ng-click="submit()">Submit</button>
-                <button type="reset" ng-click="cancel()">Cancel</button>
-              </div>
-          </form>
-        </div>
-      </div> <!-- end of data -->
-      <div class="content_column" id="results">
-
-        <div id="customer_charges" class="content">
-          <div class="headings">Customer Changes</div>
-          <table id="meal_details">
-            <tr>
-              <td>
-                Subtotal: {{ subtotal | currency }}    
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Tip: {{ tip_current | currency }}  
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Total: {{ cost_total | currency }}  
-              </td>
-            </tr>
-          </table>
-        </div> <!-- end of customer charges -->
-
-
-        <div id="my_earnings" class="content">
-          <div class="headings" id="earnings_heading">My Earnings Info</div>
-          <table id="meal_details">
-            <tr>
-              <td>
-                Tip Total: {{ tip_total | currency }}    
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Meal Count: {{ meal_count }}    
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Average Tip Per Meal: {{ tip_meal_avg | currency }}    
-              </td>
-            </tr>
-          </table>
-        </div> <!-- end of my earnings -->
-        <button class="reset" ng-click="reset()">Reset</button>
-      </div> <!-- end of results -->
+        <div class="content" ng-view></div> <!-- end of content -->
+      </div> <!-- end of content column -->
 
     </section> <!-- end of container -->
     <footer>

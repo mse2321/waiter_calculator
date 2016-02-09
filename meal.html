@@ -1,0 +1,40 @@
+<div class="headings">Enter the Meal Details</div>
+          <form name="waitCalc">
+            <table id="meal_details">
+              <tr>
+                <td>
+                  <div class="input_container">
+                    <label for="base_price">Base Meal Price: $ </label><input type="number" ng-model="base_price" required><br />
+                    <label for="tax_rate">Tax Rate: % </label><input type="number" ng-model="tax_rate" required><br />
+                    <label for="tip_percent">Tip Percentage: % </label><input type="number" ng-model="tip_percent" required><br />
+                  </div>
+                </td>
+              </tr>
+            </table>
+            <div class="form_buttons">
+                <button type="submit" ng-click="submit()">Submit</button>
+                <button type="reset" ng-click="cancel()">Cancel</button>
+            </div>
+          </form>
+</div>
+
+<div id="customer_charges">
+    <div class="headings">Customer Changes</div>
+    <table id="meal_details">
+        <tr>
+            <td>
+                Subtotal: {{ subtotal | currency }}    
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tip: {{ tip_current | currency }}  
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Total: {{ cost_total | currency }}  
+           	</td>
+        </tr>
+    </table>
+</div> <!-- end of customer charges -->

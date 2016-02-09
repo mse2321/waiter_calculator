@@ -25,7 +25,38 @@ footer p { text-align: center; }
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
   <script>
-    var demo = angular.module('demo', []);
+    var demo = angular.module('demo', ['ngRoute']);
+      demo.config(['$routeProvider', function($routeProvider){
+        $routeProvider.when('/', {
+          templateUrl: 'home.html',
+          controller: 'homeCtrl'
+        })
+        .when('/meal', {
+          templateUrl: 'meal.html',
+          controller: 'mealCtrl'
+        })
+        .when('/earnings', {
+          templateUrl: 'earnings.html',
+          controller: 'earningsCtrl'
+        })
+        .when('/error',  {
+          template: '<p>Error - Page Not Found</p>'
+        })
+        .run(function($routeScope, $location){
+          $rootScope.$on('$routeChangeError', function() {
+            $location.path('/error');
+          })
+        });
+      }])
+      demo.controller('HomeCtrl', ['$scope', function($scope){
+        //empty for now
+      }])
+      demo.controller('mealCtrl', ['$scope', function($scope){
+        //empty for now
+      }])
+      demo.controller('earningsCtrl', ['$scope', function($scope){
+        //empty for now
+      }])
       demo.controller('ctrl', function($scope){
         $scope.subtotal = 0;
         $scope.tax = 0;

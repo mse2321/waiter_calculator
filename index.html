@@ -7,28 +7,36 @@
   <style>
 body { font-family: 'Arial', sans-serif; }
 .container { width: 100%; margin: 0 auto; }
-.reset { position: absolute; top: 580px; left: 47.5%;}
-nav ul li {display: inline-block; list-style-type: none;}
-nav ul a {padding: 0 20px;}
-nav ul {padding-left: 0;}
-nav {text-align: center;}
-h1 { text-align: center; font-size: 60px; margin: 15px 0;}
-table { padding: 30px;}
-.input_container { padding: 0px; margin-bottom: 242px; text-align: right;}
-input {margin-left: 10px; margin-bottom: 20px;}
-.form_buttons { margin: 0 auto; position: absolute; top: 450px; left: 46%; z-index: 9999;}
-#intro {text-align: center; margin-top: 80px;}
-.data { display: inline-block; outline: 1px solid black; vertical-align: top; width: 100%; margin-bottom: 10px;}
+.reset { position: absolute; top: 580px; left: 47.5%; }
+nav ul li { display: inline-block; list-style-type: none; }
+nav ul a { padding: 0 20px; }
+nav ul { padding-left: 0; }
+nav { text-align: center; }
+h1 { text-align: center; font-size: 60px; margin: 15px 0; }
+table { padding: 30px; }
+.input_container { padding: 0px; margin-bottom: 242px; text-align: right; }
+
+.view-animation.ng-enter,.animate-view.ng-leave { transition:1s linear all; }
+.view-animation.ng-enter { opacity:0; }
+.view-animation.ng-enter.ng-enter-active { opacity:1; }
+.view-animation.ng-leave { opacity:1; }
+.view-animation.ng-leave.ng-leave-active { opacity:0; }
+
+input { margin-left: 10px; margin-bottom: 20px; }
+.form_buttons { margin: 0 auto; position: absolute; top: 450px; left: 46%; z-index: 9999; }
+#intro { text-align: center; margin-top: 80px; }
+.data { display: inline-block; outline: 1px solid black; vertical-align: top; width: 100%; margin-bottom: 10px; }
 .headings { text-align: left; border-bottom: 1px solid black; padding-left: 10px; padding-bottom: 15px; padding-top: 15px; font-weight: bold; font-size: 20px; }
 tr { height: 40px; }
-footer { margin: 0 auto; position: absolute; bottom: 10px; left: 45%;}
+footer { margin: 0 auto; position: absolute; bottom: 10px; left: 45%; }
 footer p { text-align: center; }
 
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
   <script>
-    var demo = angular.module('demo', ['ngRoute'])
+    var demo = angular.module('demo', ['ngRoute', 'ngAnimate'])
       demo.config(['$routeProvider', function($routeProvider){
         $routeProvider.when('/', {
           templateUrl: 'home.html',
@@ -109,7 +117,7 @@ footer p { text-align: center; }
     </header>
     <section class="container">
 
-      <div ng-view></div> <!-- end of content -->
+      <div ng-view class="view-animation"></div> <!-- end of content -->
 
     </section> <!-- end of container -->
     <footer>

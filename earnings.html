@@ -1,21 +1,23 @@
-<div id="my_earnings">
-    <div class="headings" id="earnings_heading">My Earnings Info</div>
-    <table id="meal_details">
-        <tr>
-            <td>
-                Tip Total: {{ tip_total | currency }}    
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Meal Count: {{ meal_count }}    
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Average Tip Per Meal: {{ tip_meal_avg | currency }}    
-            </td>
-        </tr>
-    </table>
-</div> <!-- end of my earnings -->
+<div class="data">
+    <div id="my_earnings">
+        <div class="headings">My Earnings Info</div>
+        <table id="meal_details">
+            <tr>
+                <td>
+                    Tip Total: {{ tip_total | currency }}    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Meal Count: {{ meal_count }}    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Average Tip Per Meal: {{ tip_meal_avg | currency }}    
+                </td>
+            </tr>
+        </table>
+    </div> <!-- end of my earnings -->
+</div>
 <button class="reset" ng-click="reset()">Reset</button>

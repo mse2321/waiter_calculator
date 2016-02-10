@@ -40,69 +40,85 @@ footer p { text-align: center; }
       demo.config(['$routeProvider', function($routeProvider){
         $routeProvider.when('/', {
           templateUrl: 'home.html',
-          controller: 'homeCtrl'
+          controller: 'ctrl'
         })
         .when('/home', {
           templateUrl: 'home.html',
-          controller: 'homeCtrl'
+          controller: 'ctrl'
         })
         .when('/meal', {
           templateUrl: 'meal.html',
-          controller: 'mealCtrl'
+          controller: 'ctrl'
         })
         .when('/earnings', {
           templateUrl: 'earnings.html',
-          controller: 'mealCtrl'
+          controller: 'ctrl'
         })
         .otherwise('/error',  {
           template: '<p>Error - Page Not Found</p>'
         });
       }])
-      demo.controller('homeCtrl', ['$scope', function($scope){
-        //empty for now
-      }])
-      demo.controller('mealCtrl', ['$scope', function($scope){
-        $scope.submit = function(){
-          $scope.tax = $scope.base_price * ( $scope.tax_rate / 100);
-          $scope.subtotal = $scope.base_price + $scope.tax;
-          $scope.tip_current = $scope.base_price * ( $scope.tip_percent / 100 );
-          $scope.tip_total = $scope.tip_current
+      demo.factory('info', function(){
+        return {
+          data: {
+            tax: 0,
+            subtotal: 0,
+            tip_current: 0,
+            tip_total: 0,
+            meal_count: 0,
+            cost_total: 0,
+            tip_meal_avg: 0
+          }
+        }
+      })
+      demo.controller('ctrl', ['$scope', '$route', 'info', '$location', function($scope, $route, info, $location){
+          $scope.subtotal = info.data.subtotal;
+          $scope.tax = info.data.tax;
+          $scope.meal_count = info.data.meal_count;
+          $scope.cost_total = info.data.cost_total;
+          $scope.tip_current = info.data.tip_current;
+          $scope.tip_meal_avg = info.data.tip_meal_avg;
+          $scope.tip_total = info.data.tip_total;
 
-          $scope.meal_count = $scope.meal_count + 1;
-          $scope.cost_total = $scope.tip_current + $scope.subtotal;
-          $scope.tip_meal_avg = $scope.tip_total / $scope.meal_count;
+        $scope.submit = function(){
+          info.data.tax = $scope.base_price * ( $scope.tax_rate / 100);
+          info.data.subtotal = $scope.base_price + info.data.tax;
+          info.data.tip_current = $scope.base_price * ( $scope.tip_percent / 100 );
+          info.data.tip_total = info.data.tip_current;
+
+          info.data.meal_count = info.data.meal_count + 1;
+          info.data.cost_total = info.data.tip_current + info.data.subtotal;
+          info.data.tip_meal_avg = info.data.tip_total / info.data.meal_count;
+
+          $location.path('meal');
+          $route.reload();
         }
 
         $scope.cancel = function(){
-          $scope.tax = 0;
-          $scope.subtotal = 0;
-          $scope.tip_current = 0;
-          $scope.tip_total = 0;
-          $scope.cost_total = 0;
+          info.data.tax = 0;
+          info.data.subtotal = 0;
+          info.data.tip_current = 0;
+          info.data.tip_total = 0;
+          info.data.cost_total = 0;
         }
 
         $scope.reset = function(){
-          $scope.tax = 0;
-          $scope.subtotal = 0;
-          $scope.tip_current = 0;
-          $scope.tip_total = 0;
-          $scope.cost_total = 0;
-          $scope.tip_meal_avg = 0;
-          $scope.base_price = 0;
-          $scope.meal_count = 0;
-          $scope.tax_rate = 0;
-          $scope.tip_percent = 0;
+          info.data.tax = 0;
+          info.data.subtotal = 0;
+          info.data.tip_current = 0;
+          info.data.tip_total = 0;
+          info.data.cost_total = 0;
+          info.data.tip_meal_avg = 0;
+          info.data.base_price = 0;
+          info.data.meal_count = 0;
+          info.data.tax_rate = 0;
+          info.data.tip_percent = 0;
+
+          $location.path('earnings');
+          $route.reload();
         }
       }])
-      demo.controller('ctrl', function($scope){
-        $scope.subtotal = 0;
-        $scope.tax = 0;
-        $scope.meal_count = 0;
-        $scope.cost_total = 0;
-        $scope.tip_current = 0;
-        $scope.tip_meal_avg = 0;
-        $scope.tip_total = 0;
-      });
+
   </script>
   <body>
     <header>
